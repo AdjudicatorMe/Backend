@@ -44,17 +44,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
-    'anymail'
-
+    
 ]
 
 
-ANYMAIL = {
-  "GMAIL_API_CLIENT_ID":     "1085999508602-i88vfvlcup068g0a52sajun57liser4l.apps.googleusercontent.com",
-  "GMAIL_API_CLIENT_SECRET": "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",
-  "GMAIL_API_REDIRECT_URI":  "http://localhost:5174/__gmail__/callback/",
-  # where django-anymail will handle the OAuth callback
-}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
