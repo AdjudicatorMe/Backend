@@ -10,7 +10,6 @@ from django.http import JsonResponse
 
 
 urlpatterns = [
-    path("__gmail__/", include("anymail.urls")),
     path('calendar/', calendar_api, name='calendar'),
     path('reset-password/<str:token>/', reset_password, name='reset-password'),
     path('password-reset/', password_reset, name='password_reset'),
