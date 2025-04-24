@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <style>
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .search-bar {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .event-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            width: 300px;
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+        .join-btn {
+            background-color: #5f35f5;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h1>Upcoming Events</h1>
+
+
+    <!-- Events List -->
+    <div>
+        {% for event in events %}
+        <div class="event-card">
+            <h2>{{ event.title }}</h2>
+            
+            <p><strong>Time:</strong> {{ event.start_time }} – {{ event.end_time }}</p>
+            <p><strong>Location:</strong> {{ event.location }}</p>
+            <p>{{ event.description }}</p>
+
+            <!-- Join Form -->
+            <form method="POST" action="{% url 'register_event' event.id %}">
+                {% csrf_token %}
+                <button type="submit" class="join-btn">Join Event</button>
+            </form>
+        </div>
+        {% empty %}
+        <p>No events found.</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

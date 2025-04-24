@@ -1,0 +1,18 @@
+<form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+  </form>
+
+<h1>
+    Curious is the trap makers art...
+</h1>
+<a href="{% url 'courses' %}" style="display: inline-block; padding: 10px 20px; background-color: #5f35f5; color: white; text-decoration: none; border-radius: 5px; margin-top: 20px;">
+    View Courses
+</a>
+<body>
+    <h1>Feature Details</h1>
+    <p><strong>Name:</strong> {{ feature.name }}</p>
+    <p><strong>Details:</strong> {{ feature.details }}</p>
+</body>
+
+<img src="https://wallpaperaccess.com/full/3809869.jpg">

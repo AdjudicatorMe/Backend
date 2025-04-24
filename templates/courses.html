@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    <style>
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .search-bar {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .course-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            width: 300px;
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+        .enroll-btn {
+            background-color: #5f35f5;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    
+    {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        {{ message }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+    <h1>Courses</h1>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <form method="GET" action="{% url 'courses' %}">
+            <input type="text" name="q" class="search-bar" placeholder="Search courses..." value="{{ query }}">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- Courses List -->
+    <div>
+        {% for course in courses %}
+        <div class="course-card">
+            {% if course.image %}
+                <img src="{{ course.image.url }}" alt="{{ course.title }}" width="100%">
+            {% endif %}
+            <h2>{{ course.title }}</h2>
+            <p>Instructor: {{ course.instructor }}</p>
+            <p>{{ course.description }}</p>
+            <p>{{ course.students_enrolled }} students enrolled</p>
+            
+            <!-- Enrollment Form -->
+            <form method="POST" action="{% url 'enroll_course' course.id %}">
+                {% csrf_token %}
+                <button type="submit" class="enroll-btn">Enroll Now</button>
+            </form>
+
+        </div>
+        {% empty %}    
+        <p>No courses found.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

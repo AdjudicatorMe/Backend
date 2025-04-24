@@ -1,0 +1,11 @@
+<!-- cal/templates/cal/calendar.html -->
+
+{% extends 'cal/base.html' %}
+
+{% block content %}
+<div class="clearfix calendar-nav">
+    <a href="{% url 'calendar' %}?{{ prev_month }}" class="btn btn-light">&laquo; Previous</a>
+    <a href="{% url 'calendar' %}?{{ next_month }}" class="btn btn-light">Next &raquo;</a>
+</div>
+{{ calendar }}
+{% endblock %}
